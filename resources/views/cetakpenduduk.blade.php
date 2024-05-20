@@ -50,7 +50,6 @@
                     <th class="text-center">NIK</th>
                     <th class="text-center">Pas Foto</th>
                     <th class="text-center">Nama Lengkap</th>
-                    <th class="text-center">Hubungan Keluarga</th>
                     <th class="text-center">Jenis Kelamin</th>
                     <th class="text-center">Tempat Lahir</th>
                     <th class="text-center">Tanggal Lahir</th>
@@ -59,6 +58,7 @@
                     <th class="text-center">Jenis Bantuan</th>
                     <th class="text-center">Penerima Bantuan</th>
                     <th class="text-center">Pekerjaan</th>
+                    <th class="text-center">Kondisi Rumah</th>
                 </tr>
             </thead>
             <tbody>

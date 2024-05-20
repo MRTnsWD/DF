@@ -27,6 +27,8 @@ class RwController extends Controller
         $validatedData = $request->validate([
             'No_KK' => 'required',
             'NIK' => 'required',
+            'pas_foto' =>
+            'required|image|mimes:jpeg,png,jpg|max:2048',
             'Nama_lengkap' => 'required',
             'Hbg_kel' => 'required',
             'JK' => 'required',
@@ -39,8 +41,31 @@ class RwController extends Controller
             'Jenis_bantuan_lain' => 'required',
         ]);
 
+        if ($request->hasFile('pas_foto')) {
+            $file = $request->file('pas_foto');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/pas_foto', $fileName);
+        }
+
         try {
-            Penduduk::create($validatedData);
+            $penduduk = new Penduduk([
+                'No_KK' => $request->No_KK,
+                'NIK' => $request->NIK,
+                'pas_foto' => $fileName ?? null,
+                'Nama_lengkap' => $request->Nama_lengkap,
+                'Hbg_kel' => $request->Hbg_kel,
+                'JK' => $request->JK,
+                'tmpt_lahir' => $request->tmpt_lahir,
+                'tgl_lahir' => $request->tgl_lahir,
+                'Agama' => $request->Agama,
+                'Pendidikan_terakhir' => $request->Pendidikan_terakhir,
+                'Jenis_bantuan' => $request->Jenis_bantuan,
+                'Penerima_bantuan' => $request->Penerima_bantuan,
+                'Jenis_bantuan_lain' => $request->Jenis_bantuan_lain
+            ]);
+
+            $penduduk->save();
+
             return redirect()->route('rw.penduduk.index')->with('success', 'Data berhasil ditambahkan');
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data. Error: ' . $e->getMessage());
@@ -131,7 +156,9 @@ class RwController extends Controller
 
         // Mengelola unggahan file
         if ($request->hasFile('foto_rumah')) {
-            $path = $request->file('foto_rumah')->store('public/foto_rumah');
+            $file = $request->file('foto_rumah');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/foto_rumah', $fileName);
         }
 
         // Membuat entri baru
@@ -144,7 +171,7 @@ class RwController extends Controller
             'Penerangan' => $request->Penerangan,
             'Air_minum' => $request->Air_minum,
             'BB_masak' => $request->BB_masak,
-            'foto_rumah' => $path ?? null,
+            'foto_rumah' => $fileName ?? null,
         ]);
 
         $penduduk->save(); // Menyimpan data ke basis data

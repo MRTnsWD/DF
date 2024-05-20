@@ -208,7 +208,8 @@
 
                         <div class="card-body px-0 pt-0 pb-2">
                             <form role="form" class="form-group mx-10 my-6"
-                                action="{{ route('rw.penduduk.store') }}" method="POST">
+                                action="{{ route('rw.penduduk.store') }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <label for="no_kk">No KK</label>
                                 <div class="mb-3">
@@ -219,6 +220,12 @@
                                 <label for="nik">NIK</label>
                                 <div class="mb-3">
                                     <input type="text" id="nik" name="NIK" class="form-control"
+                                        placeholder="NIK" aria-label="NIK">
+                                </div>
+
+                                <label for="nik">Pas Foto</label>
+                                <div class="mb-3">
+                                    <input type="file" id="nik" name="pas_foto" class="form-control"
                                         placeholder="NIK" aria-label="NIK">
                                 </div>
 

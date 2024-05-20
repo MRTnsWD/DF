@@ -292,7 +292,7 @@
                                     <img src="{{ asset('storage/foto_rumah/' . $kondisi->foto_rumah) }}"
                                         alt="" style="width: 100px">
                                     <input type="file" id="foto_rumah" name="foto_rumah" class="form-control"
-                                        placeholder="foto_rumah" aria-label="foto_rumah">
+                                        placeholder="foto_rumah" aria-label="foto_rumah" required>
                                 </div>
                                 <div class="mb-3">
                                     <div class="text-center">

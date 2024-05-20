@@ -202,6 +202,11 @@
                     <div class="card mb-4">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                             <h6>Data Penduduk</h6>
+                            @if (session('error'))
+                                <div class="alert alert-danger text-white">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                             <div>
                                 <a href="{{ url('/cetakpenduduk') }}" class="btn btn-primary" target="blank">Cetak
                                     sebagai PDF</a>
