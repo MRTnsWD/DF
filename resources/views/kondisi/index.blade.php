@@ -225,6 +225,12 @@
                     <div class="card mb-4">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                             <h6>Data Kondisi Rumah</h6>
+                            <form action="{{ url('/kondisi') }}" method="GET"
+                                class="d-flex me-2 align-items-center">
+                                <input type="text" name="search" class="form-control me-2"
+                                    placeholder="Cari...">
+                                <button type="submit" class="btn btn-primary">Cari</button>
+                            </form>
                             <a href="{{ route('kondisi.add') }}" class="btn btn-primary">Tambah Kondisi</a>
                         </div>
 

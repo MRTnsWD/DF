@@ -236,7 +236,12 @@
                                 </div>
                             @endif
                             <div>
-
+                                <form action="{{ url('/penduduk') }}" method="GET"
+                                    class="d-flex me-2 align-items-center">
+                                    <input type="text" name="search" class="form-control me-2"
+                                        placeholder="Cari...">
+                                    <button type="submit" class="btn btn-primary">Cari</button>
+                                </form>
                                 <a href="{{ url('/cetakpenduduk') }}" class="btn btn-primary" target="blank">Cetak
                                     sebagai PDF</a>
                                 <a href="{{ route('penduduk.add') }}" class="btn btn-secondary">Tambah Penduduk</a>

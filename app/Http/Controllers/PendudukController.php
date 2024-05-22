@@ -13,11 +13,30 @@ use Phpml\Classification\NaiveBayes;
 class PendudukController extends Controller
 {
     // Method untuk menampilkan data penduduk
-    public function index()
+    public function index(Request $request)
     {
-        $penduduk = Penduduk::all();
+        $query = Penduduk::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('No_KK', 'like', "%{$search}%")
+                ->orWhere('NIK', 'like', "%{$search}%")
+                ->orWhere('Nama_lengkap', 'like', "%{$search}%")
+                ->orWhere('Hbg_kel', 'like', "%{$search}%")
+                ->orWhere('JK', 'like', "%{$search}%")
+                ->orWhere('tmpt_lahir', 'like', "%{$search}%")
+                ->orWhere('tgl_lahir', 'like', "%{$search}%")
+                ->orWhere('Agama', 'like', "%{$search}%")
+                ->orWhere('Pendidikan_terakhir', 'like', "%{$search}%")
+                ->orWhere('Jenis_bantuan', 'like', "%{$search}%")
+                ->orWhere('Penerima_bantuan', 'like', "%{$search}%")
+                ->orWhere('Jenis_bantuan_lain', 'like', "%{$search}%");
+        }
+
+        $penduduk = $query->get();
         return view('penduduk.index', compact('penduduk'));
     }
+
 
     public function cetakpenduduk()
     {

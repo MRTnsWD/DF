@@ -8,11 +8,27 @@ use Illuminate\Http\Request;
 
 class KondisiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kondisi = KondisiRumah::with('penduduk')->get();
+        $query = KondisiRumah::with('penduduk');
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->whereHas('penduduk', function ($q) use ($search) {
+                $q->where('NIK', 'like', "%{$search}%");
+            })->orWhere('Luas_lantai', 'like', "%{$search}%")
+                ->orWhere('Jenis_lantai', 'like', "%{$search}%")
+                ->orWhere('Jenis_dinding', 'like', "%{$search}%")
+                ->orWhere('Fasilitas_BAB', 'like', "%{$search}%")
+                ->orWhere('Penerangan', 'like', "%{$search}%")
+                ->orWhere('Air_minum', 'like', "%{$search}%")
+                ->orWhere('BB_masak', 'like', "%{$search}%");
+        }
+
+        $kondisi = $query->get();
         return view('kondisi.index', compact('kondisi'));
     }
+
 
     public function create()
     {
