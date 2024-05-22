@@ -66,7 +66,7 @@ class KlasifikasiController extends Controller
 
         foreach ($data as $item) {
             $samples[] = [$item->Penghasilan];
-            $labels[] = $item->Penghasilan < 5000000 ? 'layak' : 'tidak layak';
+            $labels[] = $item->Penghasilan < 3000000 ? 'layak' : 'tidak layak';
             $dataToSend[] = ['id_penduduk' => $item->id_penduduk, 'penghasilan' => $item->Penghasilan, 'nama' => $item->penduduk->Nama_lengkap, 'nik' => $item->penduduk->NIK, 'id' => $item->id];
         }
 
