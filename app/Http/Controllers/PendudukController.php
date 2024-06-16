@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Klasifikasi;
 use App\Models\KondisiRumah;
 use App\Models\Pekerjaan;
 use App\Models\Pendidikan;
@@ -93,7 +94,7 @@ class PendudukController extends Controller
     public function cetakklasifikasi(Request $request)
     {
         $pendudukIds = Penduduk::where('Nama_lengkap', 'like', "%" . $request->nama . "%")->pluck('id');
-        $data = Pekerjaan::with('penduduk')->whereIn('id_penduduk', $pendudukIds)->get();
+        $data = Klasifikasi::with('penduduk')->whereIn('id_penduduk', $pendudukIds)->get();
         $kondisi = KondisiRumah::with('penduduk')->whereIn('id_penduduk', $pendudukIds)->get();
         $samples = [];
         $labels = [];
@@ -104,9 +105,9 @@ class PendudukController extends Controller
         }
 
         foreach ($data as $item) {
-            $samples[] = [$item->Penghasilan];
-            $labels[] = $item->Penghasilan < 5000000 ? 'layak' : 'tidak layak';
-            $dataToSend[] = ['id_penduduk' => $item->id_penduduk, 'penghasilan' => $item->Penghasilan, 'nama' => $item->penduduk->Nama_lengkap, 'nik' => $item->penduduk->NIK, 'pas_foto' => $item->penduduk->pas_foto, 'id' => $item->id];
+            $samples[] = [$item->keterangan];
+            $labels[] = $item->keterangan == 'layak' ? 'layak' : 'tidak layak';
+            $dataToSend[] = ['id_penduduk' => $item->id_penduduk, 'keterangan' => $item->keterangan, 'nama' => $item->penduduk->Nama_lengkap, 'nik' => $item->penduduk->NIK, 'pas_foto' => $item->penduduk->pas_foto, 'id' => $item->id];
         }
 
         $classifier = new NaiveBayes();
@@ -114,7 +115,7 @@ class PendudukController extends Controller
 
         $predictions = [];
         foreach ($dataToSend as $index => $info) {
-            $result = $classifier->predict([$info['penghasilan']]);
+            $result = $classifier->predict([$info['keterangan']]);
             $predictions[] = [
                 'id_penduduk' => $info['id_penduduk'],
                 'nama' => $info['nama'],
@@ -175,6 +176,19 @@ class PendudukController extends Controller
             ]);
 
             $penduduk->save();
+
+            $pend = '';
+            if ($request->Pendidikan_terakhir == 'SD' || $request->Pendidikan_terakhir == 'SMP' || $request->Pendidikan_terakhir == 'SMA') {
+                $pend = 'Layak';
+            } else {
+                $pend = 'Tidak Layak';
+            }
+
+            // inserrt id penduduk ke tabel klasifikasi
+            $klasifikasi = new Klasifikasi();
+            $klasifikasi->id_penduduk = $penduduk->id;
+            $klasifikasi->pendidikan = $pend;
+            $klasifikasi->save();
 
             return redirect()->route('penduduk.index')->with('success', 'Data berhasil ditambahkan');
         } catch (\Exception $e) {

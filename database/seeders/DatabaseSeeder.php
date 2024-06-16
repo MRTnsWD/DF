@@ -48,25 +48,25 @@ class DatabaseSeeder extends Seeder
         }
 
 
-        Penduduk::create([
-            'No_KK' => 213123,
-            'NIK' => 324323,
-            'Nama_lengkap' => 'Warga 1',
-            'Hbg_kel' => 'Suami',
-            'JK' => 'Laki - Laki ',
-            'tmpt_lahir' => 'bandung',
-            'tgl_lahir' => '2024-05-08',
-            'Agama' => 'Islam',
-            'Pendidikan_terakhir' => 'S1',
-            'Jenis_bantuan' => 'SKTM',
-            'Penerima_bantuan' => 'Ya',
-            'Jenis_bantuan_lain' => 'Tidak'
-        ]);
+        // Penduduk::create([
+        //     'No_KK' => 213123,
+        //     'NIK' => 324323,
+        //     'Nama_lengkap' => 'Warga 1',
+        //     'Hbg_kel' => 'Suami',
+        //     'JK' => 'Laki - Laki ',
+        //     'tmpt_lahir' => 'bandung',
+        //     'tgl_lahir' => '2024-05-08',
+        //     'Agama' => 'Islam',
+        //     'Pendidikan_terakhir' => 'S1',
+        //     'Jenis_bantuan' => 'SKTM',
+        //     'Penerima_bantuan' => 'Ya',
+        //     'Jenis_bantuan_lain' => 'Tidak'
+        // ]);
 
-        Pekerjaan::create([
-            'id_penduduk' => 1,
-            'Pekerjaan' => 'PNS',
-            'Penghasilan' => 5000000,
-        ]);
+        // Pekerjaan::create([
+        //     'id_penduduk' => 1,
+        //     'Pekerjaan' => 'PNS',
+        //     'Penghasilan' => 5000000,
+        // ]);
     }
 }

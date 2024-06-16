@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Klasifikasi extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'id_penduduk',
-        'Hasil_klasifikasi'
+        'pekerjaan',
+        'kondisi',
+        'kecocokan',
+        'keterangan',
+        'pendidikan'
     ];
 
     public function penduduk()

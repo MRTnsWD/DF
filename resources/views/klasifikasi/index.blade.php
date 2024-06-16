@@ -22,6 +22,11 @@
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+    <style>
+        .hijau {
+            background-color: #00FF00 !important;
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -286,6 +291,143 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+                                    </tbody>
+                                </table>
+                                <br><br>
+                                <h6>Data klasifikasi Penduduk</h6>
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Nama</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Pekerjaan</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Kondisi Rumah</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Pendidikan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($klasifikasi as $klasifikasis)
+                                            <tr>
+                                                <td>
+                                                    <h6 class="mb-0 text-sm">
+                                                        {{ $klasifikasis->penduduk->Nama_lengkap }}</h6>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0 text-sm">{{ $klasifikasis->pekerjaan }}</h6>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0 text-sm">{{ $klasifikasis->kondisi }}</h6>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0 text-sm">{{ $klasifikasis->pendidikan }}</h6>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                                    <h6>Data Perhitungan</h6>
+                                </div>
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            </th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            </th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Jumlah</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Ya</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Tidak</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Entropy</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Gain</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td></td>
+                                            <td>{{ $counttot }}</td>
+                                            <td>{{ $countya }}</td>
+                                            <td>{{ $counttidak }}</td>
+                                            <td>{{ $entropytot }}</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2">Pekerjaan</td>
+                                            <td>Layak</td>
+                                            <td>{{ $countpeklayak }}</td>
+                                            <td>{{ $countpeklayakya }}</td>
+                                            <td>{{ $countpeklayaktidak }}</td>
+                                            <td>{{ $entropypeklayak }}</td>
+                                            <td rowspan="2"
+                                                class="{{ $highestGainKey == 'gainpekerjaan' ? 'hijau' : '' }}">
+                                                {{ $gainpekerjaan }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tidak Layak</td>
+                                            <td>{{ $countpektidaklayak }}</td>
+                                            <td>{{ $countpektidaklayakya }}</td>
+                                            <td>{{ $countpektidaklayaktidak }}</td>
+                                            <td>{{ $entropypektidaklayak }}</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2">Kondisi Rumah</td>
+                                            <td>Layak</td>
+                                            <td>{{ $countkondisilayak }}</td>
+                                            <td>{{ $countkondisilayakya }}</td>
+                                            <td>{{ $countkondisilayaktidak }}</td>
+                                            <td>{{ $entropykondisilayak }}</td>
+                                            <td rowspan="2"
+                                                class="{{ $highestGainKey == 'gainkondisi' ? 'hijau' : '' }}">
+                                                {{ $gainkondisi }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tidak Layak</td>
+                                            <td>{{ $countkondisitidaklayak }}</td>
+                                            <td>{{ $countkondisitidaklayakya }}</td>
+                                            <td>{{ $countkondisitidaklayaktidak }}</td>
+                                            <td>{{ $entropykondisitidaklayak }}</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2">Pendidikan</td>
+                                            <td>Layak</td>
+                                            <td>{{ $countpendlayak }}</td>
+                                            <td>{{ $countpendlayakya }}</td>
+                                            <td>{{ $countpendlayaktidak }}</td>
+                                            <td>{{ $entropypendlayak }}</td>
+                                            <td rowspan="2"
+                                                class="{{ $highestGainKey == 'gainpendidikan' ? 'hijau' : '' }}">
+                                                {{ $gainpendidikan }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tidak Layak</td>
+                                            <td>{{ $countpendtidaklayak }}</td>
+                                            <td>{{ $countpendtidaklayakya }}</td>
+                                            <td>{{ $countpendtidaklayaktidak }}</td>
+                                            <td>{{ $entropypendtidaklayak }}</td>
+                                            <td></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

@@ -34,4 +34,9 @@ class Penduduk extends Model
     {
         return $this->hasOne(KondisiRumah::class, 'id_penduduk', 'id');
     }
+
+    public function klasifikasi()
+    {
+        return $this->hasOne(Klasifikasi::class, 'id_penduduk', 'id');
+    }
 }

@@ -269,6 +269,13 @@
                                         placeholder="foto_rumah" aria-label="foto_rumah">
                                 </div>
                                 <div class="mb-3">
+                                    <select id="id_penduduk" name="kesimpulan" class="form-control"
+                                        aria-label="id_penduduk">
+                                        <option value="Layak">Layak</option>
+                                        <option value="Tidak Layak">Tidak Layak</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
                                     <div class="text-center">
                                         <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Tambah
                                             Kondisi

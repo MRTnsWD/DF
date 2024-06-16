@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Klasifikasi;
 use App\Models\KondisiRumah;
 use App\Models\Pekerjaan;
 use App\Models\Pendidikan;
@@ -66,6 +67,19 @@ class RwController extends Controller
 
             $penduduk->save();
 
+            $pend = '';
+            if ($request->Pendidikan_terakhir == 'SD' || $request->Pendidikan_terakhir == 'SMP' || $request->Pendidikan_terakhir == 'SMA') {
+                $pend = 'Layak';
+            } else {
+                $pend = 'Tidak Layak';
+            }
+
+            // inserrt id penduduk ke tabel klasifikasi
+            $klasifikasi = new Klasifikasi();
+            $klasifikasi->id_penduduk = $penduduk->id;
+            $klasifikasi->pendidikan = $pend;
+            $klasifikasi->save();
+
             return redirect()->route('rw.penduduk.index')->with('success', 'Data berhasil ditambahkan');
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data. Error: ' . $e->getMessage());
@@ -94,6 +108,17 @@ class RwController extends Controller
 
         try {
             Pekerjaan::create($request->all());
+            $hit = '';
+            if ($request->Penghasilan <= 3000000) {
+                $hit = 'Layak';
+            } else {
+                $hit = 'Tidak Layak';
+            }
+
+            $klasifikasi = Klasifikasi::where('id_penduduk', $request->id_penduduk)->first();
+            $klasifikasi->update([
+                'pekerjaan' => $hit,
+            ]);
             return redirect()->route('rw.pekerjaan.index')->with('success', 'Data berhasil ditambahkan');
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data. Error: ' . $e->getMessage());
@@ -152,6 +177,8 @@ class RwController extends Controller
             'Air_minum' => 'required|string|max:255',
             'BB_masak' => 'required|string|max:255',
             'foto_rumah' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'kesimpulan' => 'required|string|max:255'
+
         ]);
 
         // Mengelola unggahan file
@@ -172,24 +199,37 @@ class RwController extends Controller
             'Air_minum' => $request->Air_minum,
             'BB_masak' => $request->BB_masak,
             'foto_rumah' => $fileName ?? null,
+            'kesimpulan' => $request->kesimpulan,
+
         ]);
 
         $penduduk->save(); // Menyimpan data ke basis data
+
+        $klasifikasi = Klasifikasi::where('id_penduduk', $request->id_penduduk)->first();
+        $pek = $klasifikasi->pekerjaan;
+        $countBaik = 0;
+        $countBaik += ($pek === 'Layak' ? 1 : 0);
+        $countBaik += ($request->kesimpulan === 'Layak' ? 1 : 0);
+        $kecocokan = $countBaik >= 2 ? 'Ya' : 'Tidak';
+        $klasifikasi->update([
+            'kondisi' => $request->kesimpulan,
+            'kecocokan' => $kecocokan,
+        ]);
 
         return redirect()->route('rw.kondisi.index')->with('success', 'Kondisi berhasil ditambahkan.');
     }
 
     public function predict()
     {
-        $data = Pekerjaan::with('penduduk')->get();
+        $data = Klasifikasi::with('penduduk')->get();
         $samples = [];
         $labels = [];
         $dataToSend = [];
 
         foreach ($data as $item) {
-            $samples[] = [$item->Penghasilan];
-            $labels[] = $item->Penghasilan < 5000000 ? 'layak' : 'tidak layak';
-            $dataToSend[] = ['id_penduduk' => $item->id_penduduk, 'penghasilan' => $item->Penghasilan, 'nama' => $item->penduduk->Nama_lengkap, 'nik' => $item->penduduk->NIK, 'id' => $item->id];
+            $samples[] = [$item->keterangan];
+            $labels[] = $item->keterangan == 'layak' ? 'layak' : 'tidak layak';
+            $dataToSend[] = ['id_penduduk' => $item->id_penduduk, 'keterangan' => $item->keterangan, 'nama' => $item->penduduk->Nama_lengkap, 'nik' => $item->penduduk->NIK, 'id' => $item->id];
         }
 
         $classifier = new NaiveBayes();
@@ -197,7 +237,7 @@ class RwController extends Controller
 
         $predictions = [];
         foreach ($dataToSend as $index => $info) {
-            $result = $classifier->predict([$info['penghasilan']]);
+            $result = $classifier->predict([$info['keterangan']]);
             $predictions[] = [
                 'id_penduduk' => $info['id_penduduk'],
                 'nama' => $info['nama'],

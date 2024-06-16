@@ -304,9 +304,18 @@
 
                                 <label for="pendidikan_terakhir">Pendidikan Terakhir</label>
                                 <div class="mb-3">
-                                    <input type="text" id="pendidikan_terakhir" name="Pendidikan_terakhir"
-                                        class="form-control" placeholder="Pendidikan Terakhir"
-                                        aria-label="Pendidikan Terakhir">
+                                    <select id="agama" name="Pendidikan_terakhir" class="form-control"
+                                        aria-label="Agama">
+                                        <option value="" readonly>Pilih Pendidikan</option>
+                                        <option value="SD">SD</option>
+                                        <option value="SMP">SMP</option>
+                                        <option value="SMA">SMA</option>
+                                        <option value="D3">D3</option>
+                                        <option value="S1">D4/S1</option>
+                                        <option value="S2">S2</option>
+                                        <option value="S3">S3</option>
+                                        <option value="Tidak">Tidak Sekolah</option>
+                                    </select>
                                 </div>
 
                                 <label for="jenis_bantuan">Jenis Bantuan</label>

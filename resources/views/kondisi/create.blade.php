@@ -278,22 +278,30 @@
                                         placeholder="Penerangan" aria-label="Penerangan">
                                 </div>
 
-                                <label for="Air_minum">Air_minum</label>
+                                <label for="Air_minum">Air Minum</label>
                                 <div class="mb-3">
                                     <input type="text" id="Air_minum" name="Air_minum" class="form-control"
                                         placeholder="Air_minum" aria-label="Air_minum">
                                 </div>
 
-                                <label for="BB_masak">BB_masak</label>
+                                <label for="BB_masak">BB Masak</label>
                                 <div class="mb-3">
                                     <input type="text" id="BB_masak" name="BB_masak" class="form-control"
                                         placeholder="BB_masak" aria-label="BB_masak">
                                 </div>
 
-                                <label for="foto_rumah">foto_rumah</label>
+                                <label for="foto_rumah">Foto Rumah</label>
                                 <div class="mb-3">
                                     <input type="file" id="foto_rumah" name="foto_rumah" class="form-control"
                                         placeholder="foto_rumah" aria-label="foto_rumah" required>
+                                </div>
+                                <label for="foto_rumah">Kesimpulan</label>
+                                <div class="mb-3">
+                                    <select id="id_penduduk" name="kesimpulan" class="form-control"
+                                        aria-label="id_penduduk">
+                                        <option value="Layak">Layak</option>
+                                        <option value="Tidak Layak">Tidak Layak</option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <div class="text-center">
