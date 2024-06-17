@@ -10,11 +10,10 @@ class Klasifikasi extends Model
     use HasFactory;
     protected $fillable = [
         'id_penduduk',
-        'pekerjaan',
-        'kondisi',
-        'kecocokan',
-        'keterangan',
-        'pendidikan'
+        'pendapatan',
+        'jumlah',
+        'status',
+        'keterangan'
     ];
 
     public function penduduk()

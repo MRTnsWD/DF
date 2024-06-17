@@ -250,19 +250,32 @@
 
                                 <label for="Pekerjaan">Pekerjaan</label>
                                 <div class="mb-3">
-                                    <input type="text" id="Pekerjaan" name="Pekerjaan" class="form-control"
+                                    <input type="text" id="Pekerjaan" name="pekerjaan" class="form-control"
                                         placeholder="Pekerjaan" aria-label="Pekerjaan">
                                 </div>
 
-                                <label for="Penghasilan">Penghasilan</label>
+                                <label for="Penghasilan">Pendapatan</label>
                                 <div class="mb-3">
-                                    <input type="text" id="Penghasilan" name="Penghasilan" class="form-control"
-                                        placeholder="Penghasilans" aria-label="Penghasilans">
+                                    <input type="text" id="pendapatan" name="pendapatan" class="form-control"
+                                        placeholder="pendapatan" aria-label="Penghasilans">
+                                </div>
+                                <label for="Penghasilan">Jumlah Anggota Keluarga</label>
+                                <div class="mb-3">
+                                    <input type="number" id="pendapatan" name="jumlah" class="form-control"
+                                        placeholder="Jumlah Anggota Keluarga" aria-label="Penghasilans">
+                                </div>
+                                <label for="Penghasilan">Status Pekerjaan</label>
+                                <div class="mb-3">
+                                    <select id="id_penduduk" name="status" class="form-control"
+                                        aria-label="id_penduduk">
+                                        <option value="Bekerja">Bekerja</option>
+                                        <option value="Tidak Bekerja">Tidak Bekerja</option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <div class="text-center">
                                         <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Tambah
-                                            pekerjaan
+                                            Pekerjaan
                                         </button>
                                     </div>
                                 </div>

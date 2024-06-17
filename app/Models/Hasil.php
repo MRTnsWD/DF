@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pekerjaan extends Model
+class Hasil extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'id_penduduk',
-        'pekerjaan',
         'pendapatan',
         'jumlah',
-        'status'
+        'status',
+        'keterangan'
     ];
 
     public function penduduk()

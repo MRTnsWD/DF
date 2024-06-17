@@ -245,7 +245,13 @@
                                                 Pekerjaan</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Penghasilan</th>
+                                                Pendapatan</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Jumlah Keluarga</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -255,10 +261,16 @@
                                                     <h6 class="mb-0 text-sm">{{ $p->penduduk->Nama_lengkap }}</h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-sm">{{ $p->Pekerjaan }}</h6>
+                                                    <h6 class="mb-0 text-sm">{{ $p->pekerjaan }}</h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-sm">{{ $p->Penghasilan }}</h6>
+                                                    <h6 class="mb-0 text-sm">{{ $p->penghasilan }}</h6>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0 text-sm">{{ $p->jumlah }}</h6>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-0 text-sm">{{ $p->status }}</h6>
                                                 </td>
                                                 <td class="align-middle">
                                                     <a href="{{ route('pekerjaan.edit', $p->id) }}"

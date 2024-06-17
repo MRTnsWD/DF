@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hasil;
 use App\Models\Klasifikasi;
 use App\Models\KondisiRumah;
 use App\Models\Pekerjaan;
@@ -177,18 +178,14 @@ class PendudukController extends Controller
 
             $penduduk->save();
 
-            $pend = '';
-            if ($request->Pendidikan_terakhir == 'SD' || $request->Pendidikan_terakhir == 'SMP' || $request->Pendidikan_terakhir == 'SMA') {
-                $pend = 'Layak';
-            } else {
-                $pend = 'Tidak Layak';
-            }
-
             // inserrt id penduduk ke tabel klasifikasi
             $klasifikasi = new Klasifikasi();
             $klasifikasi->id_penduduk = $penduduk->id;
-            $klasifikasi->pendidikan = $pend;
             $klasifikasi->save();
+
+            $hasil = new Hasil();
+            $hasil->id_penduduk = $penduduk->id;
+            $hasil->save();
 
             return redirect()->route('penduduk.index')->with('success', 'Data berhasil ditambahkan');
         } catch (\Exception $e) {

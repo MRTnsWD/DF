@@ -256,7 +256,7 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                            <h6>Data klasifikasi Naive Byes</h6>
+                            <h6>Data klasifikasi</h6>
                             <a href="{{ url('/cetakklasifikasi') }}" class="btn btn-primary" target="blank">Cetak
                                 sebagai PDF</a>
                         </div>
@@ -268,113 +268,168 @@
                                         <tr>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                NIK</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                 NAMA</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Pendapatan</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Jumlah Anggota Keluarga</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                status</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Keterangan</th>
+                                                Klasifikasi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($hasils as $hasil)
+                                        @foreach ($predictions as $prediction)
                                             <tr>
                                                 <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $hasil->penduduk->Nama_lengkap }}
-                                                    </p>
+                                                    <h6 class="mb-0 text-sm">{{ $prediction['nik'] }}</h6>
                                                 </td>
                                                 <td>
-                                                    <p class="text-xs font-weight-bold mb-0">{{ $hasil->pendapatan }}
-                                                    </p>
+                                                    <h6 class="mb-0 text-sm">{{ $prediction['nama'] }}</h6>
                                                 </td>
                                                 <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $hasil->jumlah }}</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0">{{ $hasil->status }}</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0">{{ $hasil->keterangan }}
-                                                    </p>
+                                                    <h6 class="mb-0 text-sm">{{ $prediction['klasifikasi'] }}</h6>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                                 <br><br>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card mb-4">
-                        <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                            <h6>Data klasifikasi C4.5</h6>
-                            {{-- <a href="{{ url('/cetakklasifikasi') }}" class="btn btn-primary" target="blank">Cetak
-                                sebagai PDF</a> --}}
-                        </div>
-
-                        <div class="card-body px-0 pt-0 pb-2">
-                            <div class="table-responsive p-0">
+                                <h6>Data klasifikasi Penduduk</h6>
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                NAMA</th>
+                                                Nama</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Pendapatan</th>
+                                                Pekerjaan</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Jumlah Anggota Keluarga</th>
+                                                Kondisi Rumah</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                status</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Keterangan</th>
+                                                Pendidikan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($klasifikasis as $klasifikasi)
+                                        @foreach ($klasifikasi as $klasifikasis)
                                             <tr>
                                                 <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $klasifikasi->penduduk->Nama_lengkap }}
-                                                    </p>
+                                                    <h6 class="mb-0 text-sm">
+                                                        {{ $klasifikasis->penduduk->Nama_lengkap }}</h6>
                                                 </td>
                                                 <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $klasifikasi->pendapatan }}
-                                                    </p>
+                                                    <h6 class="mb-0 text-sm">{{ $klasifikasis->pekerjaan }}</h6>
                                                 </td>
                                                 <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $klasifikasi->jumlah }}</p>
+                                                    <h6 class="mb-0 text-sm">{{ $klasifikasis->kondisi }}</h6>
                                                 </td>
                                                 <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $klasifikasi->status }}</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0">
-                                                        {{ $klasifikasi->keterangan }}
-                                                    </p>
+                                                    <h6 class="mb-0 text-sm">{{ $klasifikasis->pendidikan }}</h6>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <br><br>
+                                <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                                    <h6>Data Perhitungan</h6>
+                                </div>
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            </th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            </th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Jumlah</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Ya</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Tidak</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Entropy</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Gain</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td></td>
+                                            <td>{{ $counttot }}</td>
+                                            <td>{{ $countya }}</td>
+                                            <td>{{ $counttidak }}</td>
+                                            <td>{{ $entropytot }}</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2">Pekerjaan</td>
+                                            <td>Layak</td>
+                                            <td>{{ $countpeklayak }}</td>
+                                            <td>{{ $countpeklayakya }}</td>
+                                            <td>{{ $countpeklayaktidak }}</td>
+                                            <td>{{ $entropypeklayak }}</td>
+                                            <td rowspan="2"
+                                                class="{{ $highestGainKey == 'gainpekerjaan' ? 'hijau' : '' }}">
+                                                {{ $gainpekerjaan }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tidak Layak</td>
+                                            <td>{{ $countpektidaklayak }}</td>
+                                            <td>{{ $countpektidaklayakya }}</td>
+                                            <td>{{ $countpektidaklayaktidak }}</td>
+                                            <td>{{ $entropypektidaklayak }}</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2">Kondisi Rumah</td>
+                                            <td>Layak</td>
+                                            <td>{{ $countkondisilayak }}</td>
+                                            <td>{{ $countkondisilayakya }}</td>
+                                            <td>{{ $countkondisilayaktidak }}</td>
+                                            <td>{{ $entropykondisilayak }}</td>
+                                            <td rowspan="2"
+                                                class="{{ $highestGainKey == 'gainkondisi' ? 'hijau' : '' }}">
+                                                {{ $gainkondisi }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tidak Layak</td>
+                                            <td>{{ $countkondisitidaklayak }}</td>
+                                            <td>{{ $countkondisitidaklayakya }}</td>
+                                            <td>{{ $countkondisitidaklayaktidak }}</td>
+                                            <td>{{ $entropykondisitidaklayak }}</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2">Pendidikan</td>
+                                            <td>Layak</td>
+                                            <td>{{ $countpendlayak }}</td>
+                                            <td>{{ $countpendlayakya }}</td>
+                                            <td>{{ $countpendlayaktidak }}</td>
+                                            <td>{{ $entropypendlayak }}</td>
+                                            <td rowspan="2"
+                                                class="{{ $highestGainKey == 'gainpendidikan' ? 'hijau' : '' }}">
+                                                {{ $gainpendidikan }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tidak Layak</td>
+                                            <td>{{ $countpendtidaklayak }}</td>
+                                            <td>{{ $countpendtidaklayakya }}</td>
+                                            <td>{{ $countpendtidaklayaktidak }}</td>
+                                            <td>{{ $entropypendtidaklayak }}</td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
