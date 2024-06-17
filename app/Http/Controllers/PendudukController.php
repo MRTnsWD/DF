@@ -97,36 +97,9 @@ class PendudukController extends Controller
         $pendudukIds = Penduduk::where('Nama_lengkap', 'like', "%" . $request->nama . "%")->pluck('id');
         $data = Klasifikasi::with('penduduk')->whereIn('id_penduduk', $pendudukIds)->get();
         $kondisi = KondisiRumah::with('penduduk')->whereIn('id_penduduk', $pendudukIds)->get();
-        $samples = [];
-        $labels = [];
-        $dataToSend = [];
 
-        if ($data->isEmpty()) {
-            return redirect()->route('klasifikasi.index')->with('error', 'Data tidak ditemukan');
-        }
-
-        foreach ($data as $item) {
-            $samples[] = [$item->keterangan];
-            $labels[] = $item->keterangan == 'layak' ? 'layak' : 'tidak layak';
-            $dataToSend[] = ['id_penduduk' => $item->id_penduduk, 'keterangan' => $item->keterangan, 'nama' => $item->penduduk->Nama_lengkap, 'nik' => $item->penduduk->NIK, 'pas_foto' => $item->penduduk->pas_foto, 'id' => $item->id];
-        }
-
-        $classifier = new NaiveBayes();
-        $classifier->train($samples, $labels);
-
-        $predictions = [];
-        foreach ($dataToSend as $index => $info) {
-            $result = $classifier->predict([$info['keterangan']]);
-            $predictions[] = [
-                'id_penduduk' => $info['id_penduduk'],
-                'nama' => $info['nama'],
-                'nik' => $info['nik'],
-                'pas_foto' => $info['pas_foto'],
-                'id' => $info['id'],
-                'klasifikasi' => $result
-            ];
-        }
-        return view('cetakklasifikasi', ['predictions' => $predictions], ['kondisi' => $kondisi]);
+        $hasils = Hasil::with('penduduk')->get();
+        return view('cetakklasifikasi', compact('data', 'kondisi', 'hasils'));
     }
 
     public function create()

@@ -53,22 +53,22 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($predictions as $prediction)
+                @forelse ($data as $prediction)
                     @php
                         // Temukan kondisi yang sesuai untuk prediksi ini
-                        $kondisiItem = $kondisi->firstWhere('id_penduduk', $prediction['id_penduduk']);
+                        $kondisiItem = $kondisi->firstWhere('id_penduduk', $prediction->id_penduduk);
                     @endphp
                     <tr>
                         <td class="text-center">
-                            @if ($prediction['pas_foto'])
-                                <img src="{{ asset('storage/pas_foto/' . $prediction['pas_foto']) }}" alt="Pas Foto"
-                                    style="width: 50px;">
+                            @if ($prediction->penduduk->pas_foto)
+                                <img src="{{ asset('storage/pas_foto/' . $prediction->penduduk->pas_foto) }}"
+                                    alt="Pas Foto" style="width: 50px;">
                             @else
                                 Tidak Ada Foto
                             @endif
                         </td>
-                        <td>{{ $prediction['nik'] }}</td>
-                        <td>{{ $prediction['nama'] }}</td>
+                        <td>{{ $prediction->penduduk->NIK }}</td>
+                        <td>{{ $prediction->penduduk->Nama_lengkap }}</td>
                         <td>
                             @if ($kondisiItem)
                                 <img src="{{ asset('storage/foto_rumah/' . $kondisiItem->foto_rumah) }}" alt=""
@@ -77,7 +77,7 @@
                                 <span>Foto tidak tersedia</span>
                             @endif
                         </td>
-                        <td>{{ $prediction['klasifikasi'] }}</td>
+                        <td>{{ $prediction->keterangan }}</td>
                     </tr>
                 @empty
                     <tr>

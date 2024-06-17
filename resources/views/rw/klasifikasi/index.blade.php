@@ -197,7 +197,7 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                            <h6>Data klasifikasi</h6>
+                            <h6>Data klasifikasi Naive Byes</h6>
                             <a href="{{ url('/cetakklasifikasi') }}" class="btn btn-primary" target="blank">Cetak
                                 sebagai PDF</a>
                         </div>
@@ -209,34 +209,113 @@
                                         <tr>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                NIK</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                 NAMA</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Klasifikasi</th>
+                                                Pendapatan</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Aksi</th>
+                                                Jumlah Anggota Keluarga</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                status</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Keterangan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($predictions as $prediction)
+                                        @foreach ($hasils as $hasil)
                                             <tr>
                                                 <td>
-                                                    <h6 class="mb-0 text-sm">{{ $prediction['nik'] }}</h6>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $hasil->penduduk->Nama_lengkap }}
+                                                    </p>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-sm">{{ $prediction['nama'] }}</h6>
+                                                    <p class="text-xs font-weight-bold mb-0">{{ $hasil->pendapatan }}
+                                                    </p>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-sm">{{ $prediction['klasifikasi'] }}</h6>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $hasil->jumlah }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">{{ $hasil->status }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">{{ $hasil->keterangan }}
+                                                    </p>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <br><br>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                            <h6>Data klasifikasi C4.5</h6>
+                            {{-- <a href="{{ url('/cetakklasifikasi') }}" class="btn btn-primary" target="blank">Cetak
+                                sebagai PDF</a> --}}
+                        </div>
+
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                NAMA</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Pendapatan</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Jumlah Anggota Keluarga</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                status</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Keterangan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($klasifikasis as $klasifikasi)
+                                            <tr>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $klasifikasi->penduduk->Nama_lengkap }}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $klasifikasi->pendapatan }}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $klasifikasi->jumlah }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $klasifikasi->status }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $klasifikasi->keterangan }}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <br><br>
                             </div>
                         </div>
                     </div>

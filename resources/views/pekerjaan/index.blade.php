@@ -264,7 +264,7 @@
                                                     <h6 class="mb-0 text-sm">{{ $p->pekerjaan }}</h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-sm">{{ $p->penghasilan }}</h6>
+                                                    <h6 class="mb-0 text-sm">{{ $p->pendapatan }}</h6>
                                                 </td>
                                                 <td>
                                                     <h6 class="mb-0 text-sm">{{ $p->jumlah }}</h6>

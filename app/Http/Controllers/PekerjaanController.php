@@ -67,6 +67,7 @@ class PekerjaanController extends Controller
                 'jumlah' => $jml,
                 'status' => $request->status
             ]);
+
             $tipe = '';
             if ($hit == 'Rendah' && $jml == 'Sedikit' && $request->status == 'Bekerja') {
                 $tipe = 'rsb';
